@@ -21,10 +21,10 @@ import com.massivecraft.factions.scoreboards.FTeamWrapper;
 import com.massivecraft.factions.scoreboards.sidebar.FDefaultSidebar;
 import com.massivecraft.factions.struct.ChatMode;
 import com.massivecraft.factions.struct.Permission;
-import com.massivecraft.factions.util.ComponentDispatcher;
 import com.massivecraft.factions.util.TL;
 import com.massivecraft.factions.util.TextUtil;
 import com.massivecraft.factions.util.VisualizeUtil;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -334,8 +334,9 @@ public class FactionsPlayerListener extends AbstractListener {
 
         if (me.isMapAutoUpdating()) {
             if (!showTimes.containsKey(player.getUniqueId()) || (showTimes.get(player.getUniqueId()) < System.currentTimeMillis())) {
+                Audience audience = FactionsPlugin.getInstance().getAdventure().player(player);
                 for (Component component : Board.getInstance().getMap(me, to, player.getLocation().getYaw())) {
-                    ComponentDispatcher.send(player, component);
+                    audience.sendMessage(component);
                 }
                 showTimes.put(player.getUniqueId(), System.currentTimeMillis() + FactionsPlugin.getInstance().conf().commands().map().getCooldown());
             }
@@ -381,10 +382,11 @@ public class FactionsPlayerListener extends AbstractListener {
                 type == EntityType.LLAMA ||
                 type == EntityType.TRADER_LLAMA ||
                 type == EntityType.PIG ||
-                type == EntityType.LEASH_KNOT ||
-                type.name().contains("_MINECART") ||
-                type.name().contains("_CHEST_BOAT")
-
+                type == EntityType.LEASH_HITCH ||
+                type == EntityType.MINECART_CHEST ||
+                type == EntityType.MINECART_FURNACE ||
+                type == EntityType.MINECART_HOPPER ||
+                type == EntityType.CHEST_BOAT
         ) {
             check = true;
         }
@@ -867,5 +869,10 @@ public class FactionsPlayerListener extends AbstractListener {
             }
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerPreLogin(PlayerLoginEvent event) {
+        FPlayers.getInstance().getByPlayer(event.getPlayer());
     }
 }

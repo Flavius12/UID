@@ -101,7 +101,6 @@ public enum Role implements Permissible {
         return "";
     }
 
-    @Deprecated
     @Override
     public ChatColor getColor() {
         return Relation.MEMBER.getColor();

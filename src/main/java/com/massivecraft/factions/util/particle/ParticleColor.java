@@ -1,6 +1,5 @@
 package com.massivecraft.factions.util.particle;
 
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 
@@ -17,13 +16,6 @@ public class ParticleColor {
         this.red = color.getRed();
         this.green = color.getGreen();
         this.blue = color.getBlue();
-    }
-
-    public ParticleColor(TextColor color) {
-        this.color = Color.fromRGB(color.red(), color.green(), color.blue());
-        this.red = color.red();
-        this.green = color.green();
-        this.blue = color.blue();
     }
 
     public float getOffsetX() {

@@ -7,7 +7,6 @@ import com.massivecraft.factions.event.FPlayerLeaveEvent;
 import com.massivecraft.factions.perms.PermissibleActions;
 import com.massivecraft.factions.perms.Role;
 import com.massivecraft.factions.struct.Permission;
-import com.massivecraft.factions.util.ComponentDispatcher;
 import com.massivecraft.factions.util.TL;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -64,7 +63,7 @@ public class CmdKick extends FCommand {
                 }
             }
 
-            ComponentDispatcher.send(context.player, component);
+            FactionsPlugin.getInstance().getAdventure().player(context.player).sendMessage(component);
             return;
         }
 

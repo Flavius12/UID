@@ -384,7 +384,7 @@ public class MainConfig {
         public class SeeChunk {
             private boolean particles = true;
             @Comment("Get a list of particle names here: https://factions.support/particles/")
-            private String particleName = "DUST";
+            private String particleName = "REDSTONE";
             @Comment("If the chosen particle is compatible with coloring we will color\n" +
                     "it based on the current chunk's faction")
             private boolean relationalColor = true;
@@ -1493,8 +1493,6 @@ public class MainConfig {
             private boolean territoryDenyEndermanBlocks = true;
             private boolean territoryDenyEndermanBlocksWhenOffline = true;
             private boolean territoryBlockEntityDamageMatchingPerms = false;
-            @Comment("Blocks wind charge use to activate doors/levers/buttons etc. if lacking permission")
-            private boolean territoryBlockWindChargeInteractionMatchingPerms = false;
             @Comment("If true, lecterns can be interacted with, but taking the book will still be protected by CONTAINER perm")
             private boolean territoryAllowLecternReading = false;
             private boolean territoryDenyIceFormation = false;
@@ -1653,10 +1651,6 @@ public class MainConfig {
 
             public boolean isTerritoryBlockEntityDamageMatchingPerms() {
                 return territoryBlockEntityDamageMatchingPerms;
-            }
-
-            public boolean isTerritoryBlockWindChargeInteractionMatchingPerms() {
-                return territoryBlockWindChargeInteractionMatchingPerms;
             }
 
             public boolean isTerritoryAllowLecternReading() {
